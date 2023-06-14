@@ -12,13 +12,18 @@ def home(request):
 
 #web search(Text)
 def test(request):
-    print("request is welcome test")
-    print(request.POST['q'])  
-    
+    #print("request is welcome test")
+    #print(request.POST['q'])  
+    print("Got request to validate the text")
+    print("input from the front end is:\n",request.POST['q'])
+
     if request.POST['q']: 
         percent,link = main.findSimilarity(request.POST['q'])
+        #print(main.findSimilarity(request.POST['q']))
         percent = round(percent,2)
-    print("Output.....................!!!!!!!!",percent,link)
+    #print("Output.....................!!!!!!!!",percent,link)
+
+    #print(percent)
     return render(request, 'pc/index.html',{'link': link, 'percent': percent})
 
 #web search file(.txt, .docx)

@@ -3,8 +3,8 @@ from apiclient.discovery import build
 
 # searchEngine_API = 'AIzaSyAoEYif8sqEYvj1P6vYLw6CGMrQbDMmaq8'
 # searchEngine_API = 'AIzaSyCUYy9AtdMUddiNA0gOcsGPQcE372ytyCw'
-# searchEngine_API = 'AIzaSyAQYLRBBeDQNxADPQtUnApntz78-urWEZI'
-searchEngine_API = 'AIzaSyCAeR7_6TTKzoJmSwmOuHZvKcVg_lhqvCc'
+searchEngine_API = 'AIzaSyAQYLRBBeDQNxADPQtUnApntz78-urWEZI'
+#searchEngine_API = 'AIzaSyCAeR7_6TTKzoJmSwmOuHZvKcVg_lhqvCc'
 searchEngine_Id = '758ad3e78879f0e08'
 
 def searchWeb(text, output, c):
@@ -13,7 +13,9 @@ def searchWeb(text, output, c):
     try:
         resource = build("customsearch", 'v1',
                          developerKey=searchEngine_API).cse()
+        #print("TRying to search form the web")        
         result = resource.list(q=text, cx=searchEngine_Id).execute()
+        #print("searched successfully from the web")
         searchInfo = result['searchInformation']
         # print(searchInfo)
         if(int(searchInfo['totalResults']) > 0):
@@ -38,14 +40,14 @@ def searchWeb(text, output, c):
                 c[itemLink] = ((c[itemLink] *
                                 (output[itemLink]-1) + maxSim)/(output[itemLink]))
             else:
-                print('else', maxSim)
-                print(text)
-                print(itemLink)
+                #print('else', maxSim)
+                #print(text)
+                #print(itemLink)
                 output[itemLink] = 1
                 c[itemLink] = maxSim
     except Exception as e:
-        print(text)
-        print(e)
+        #print(text)
+        #print(e)
         print('error')
         return output, c, 1
     return output, c, 0

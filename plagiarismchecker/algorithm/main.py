@@ -44,6 +44,7 @@ def findSimilarity(text):
     n = 9
     queries = getQueries(text, n)
     print('GetQueries task complete')
+    #print(queries)
     q = [' '.join(d) for d in queries]
     output = {}
     c = {}
@@ -56,7 +57,7 @@ def findSimilarity(text):
     numqueries = count
     for s in q[0:count]:
         output, c, errorCount = webSearch.searchWeb(s, output, c)
-        print('Web search task complete')
+        #print('Web search task complete')
         numqueries = numqueries - errorCount
         # print(output,c)
         sys.stdout.flush()
@@ -76,9 +77,10 @@ def findSimilarity(text):
             outputLink[prevlink] = outputLink[prevlink] + percentage
         elif c[link] == 1:
             totalPercent = totalPercent + percentage
+
         print(link, totalPercent)
 
-    print(count, numqueries)
+    #print(count, numqueries)
     print(totalPercent, outputLink)
-    print("\nDone!")
+    #print("\nDone!")
     return totalPercent, outputLink
